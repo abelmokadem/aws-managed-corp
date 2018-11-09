@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Stack for creating the cloudformation execution user"
+Resources:
+  CloudformationUser:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: "{{resolve:ssm-secure:iam-cloudformation-execution-user-CloudformationUserPassword:1}}"
+        PasswordResetRequired: true
+      Policies:
+        - PolicyName: CloudformationExecutionPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - cloudformation:*
+                Resource: "*"
+  CloudformationUserAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      Serial: 0
+      Status: Active
+      UserName: !Sub "${CloudformationUser}"
+Outputs:
+  CloudformationUsername:
+    Description: Cloudformation Username
+    Value: !Sub "${CloudformationUser}"
+    Export:
+      Name: !Sub "${AWS::StackName}-CloudformationUsername"
+  CloudformationUserAccessKeyId:
+    Description: Cloudformation User Access Key Id
+    Value: !Sub "${CloudformationUserAccessKey}"
+    Export:
+      Name: !Sub "${AWS::StackName}-CloudformationUserAccessKeyId"
+  CloudformationUserAccessKeySecret:
+    Description: Cloudformation User Access Key Secret
+    Value: !Sub "${CloudformationUserAccessKey.SecretAccessKey}"
+    Export:
+      Name: !Sub "${AWS::StackName}-CloudformationUserAccessKeySecret"
