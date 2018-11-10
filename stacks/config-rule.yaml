@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Stack for creating the AWS Config rules"
+Resources:
+  DeliveryChannel:
+    Type: AWS::Config::DeliveryChannel
+    Properties:
+      S3BucketName: !Ref ConfigBucket
+      ConfigSnapshotDeliveryProperties:
+        DeliveryFrequency: One_Hour
+  ConfigBucket:
+    Type: AWS::S3::Bucket
+  ConfigRecorder:
+    Type: AWS::Config::ConfigurationRecorder
+    Properties:
+      RoleARN: !Sub "${ConfigRole.Arn}"
+  ConfigRuleForVolumeTags:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      InputParameters:
+        tag1Key: aws:cloudformation:stack-id
+      Source:
+        Owner: AWS
+        SourceIdentifier: "REQUIRED_TAGS"
+  ConfigRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: [config.amazonaws.com]
+            Action: ["sts:AssumeRole"]
+      ManagedPolicyArns: ["arn:aws:iam::aws:policy/service-role/AWSConfigRole"]
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: s3:GetBucketAcl
+                Resource: !Sub "arn:aws:s3:::${ConfigBucket}"
+              - Effect: Allow
+                Action: s3:PutObject
+                Resource: !Sub "arn:aws:s3:::${ConfigBucket}/AWSLogs/${AWS::AccountId}/*"
+                Condition:
+                  StringEquals:
+                    s3:x-amz-acl: bucket-owner-full-control
+              - Effect: Allow
+                Action: config:Put*
+                Resource: "*"

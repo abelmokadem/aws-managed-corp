@@ -9,9 +9,9 @@ npm i -g onchange prettier
 
 echo "Watching files '**/*.yaml' for changes"
 
-npx onchange --initial '**/*.yaml' -- \
+npx onchange --initial '**/*.{sh,yaml}' -- \
     npx prettier \
         --write \
         --print-width 80 \
         --prose-wrap always \
-        '**/*.yaml'
+        '**/*.{sh,yaml}'

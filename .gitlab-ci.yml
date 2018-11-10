@@ -1,0 +1,10 @@
+stages:
+  - lint
+  - deploy
+
+lint:
+  script: "./scripts/lint.sh"
+
+deploy:
+  script: "./scripts/deploy.sh"
+  when: "manual"
