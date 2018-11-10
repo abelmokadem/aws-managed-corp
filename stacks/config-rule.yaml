@@ -6,7 +6,7 @@ Resources:
     Properties:
       S3BucketName: !Ref ConfigBucket
       ConfigSnapshotDeliveryProperties:
-        DeliveryFrequency: One_Hour
+        DeliveryFrequency: Six_Hours
   ConfigBucket:
     Type: AWS::S3::Bucket
   ConfigRecorder:
