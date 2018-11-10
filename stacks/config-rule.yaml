@@ -14,6 +14,8 @@ Resources:
     Properties:
       RoleARN: !Sub "${ConfigRole.Arn}"
   ConfigRuleForVolumeTags:
+    DependsOn:
+      - ConfigRecorder
     Type: AWS::Config::ConfigRule
     Properties:
       InputParameters:
