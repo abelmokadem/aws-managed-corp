@@ -11,7 +11,7 @@ apt-get install -y \
     less
 apt-get clean
 
-pip3 install --upgrade pip
-pip3 --no-cache-dir install --upgrade awscli
+pip install --upgrade pip
+pip --no-cache-dir install --upgrade awscli
 
 npm install
