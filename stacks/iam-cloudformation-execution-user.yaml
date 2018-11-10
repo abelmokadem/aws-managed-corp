@@ -7,6 +7,7 @@ Resources:
       LoginProfile:
         Password: "{{resolve:ssm-secure:iam-cloudformation-execution-user-CloudformationUserPassword:1}}"
         PasswordResetRequired: true
+      ManagedPolicyArns: ["arn:aws:iam::aws:policy/job-function/ViewOnlyAccess"]
       Policies:
         - PolicyName: CloudformationExecutionPolicy
           PolicyDocument:
@@ -36,7 +37,7 @@ Resources:
             Action: ["sts:AssumeRole"]
       Path: "/"
       ManagedPolicyArns:
-        - "arn:aws:iam::aws:policy/PowerUserAccess"
+        - "arn:aws:iam::aws:policy/AdministratorAccess"
 
 Outputs:
   CloudformationUsername:
