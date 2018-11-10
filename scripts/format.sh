@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
-
 set -e
-
-echo "Installing onchange and prettier"
-
-npm i -g onchange prettier
 
 echo "Watching files '**/*.yaml' for changes"
 

@@ -1,0 +1,24 @@
+{
+  "name": "aws-managed-corp",
+  "version": "1.0.0",
+  "description": "Experimental way of managing your AWS account using cloudformation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abelmokadem/aws-managed-corp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abelmokadem/aws-managed-corp/issues"
+  },
+  "homepage": "https://github.com/abelmokadem/aws-managed-corp#readme",
+  "devDependencies": {
+    "onchange": "^5.1.0",
+    "prettier": "^1.15.1"
+  }
+}
