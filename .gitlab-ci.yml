@@ -4,7 +4,9 @@ stages:
 
 lint:
   script: "./scripts/lint.sh"
+  stage: "lint"
 
 deploy:
   script: "./scripts/deploy.sh"
+  stage: "deploy"
   when: "manual"
