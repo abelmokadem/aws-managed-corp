@@ -15,6 +15,9 @@ Resources:
               - Effect: Allow
                 Action: ["cloudformation:*"]
                 Resource: "*"
+              - Effect: Allow
+                Action: ["iam:PassRole"]
+                Resource: !Sub "${CloudformationAssumeRole.Arn}"
   CloudformationUserAccessKey:
     Type: AWS::IAM::AccessKey
     Properties:
