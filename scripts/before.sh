@@ -9,11 +9,9 @@ apt-get install -y \
     python3-setuptools \
     groff \
     less
-
-pip3 install --upgrade pip
-
 apt-get clean
 
+pip3 install --upgrade pip
 pip3 --no-cache-dir install --upgrade awscli
 
 npm install
