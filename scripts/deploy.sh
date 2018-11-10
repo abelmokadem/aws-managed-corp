@@ -6,4 +6,5 @@ aws cloudformation deploy \
     --region eu-west-1 \
     --template-file ./stacks/config-rule.yaml \
     --stack-name ${CI_PROJECT_NAME}-config-rule \
+    --capabilities CAPABILITY_IAM \
     --no-fail-on-empty-changeset
