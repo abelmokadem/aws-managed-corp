@@ -15,7 +15,7 @@ Resources:
             Statement:
               - Effect: Allow
                 Action: ["cloudformation:*"]
-                Resource: "*"
+                NotResource: ["arn:aws:cloudformation:*:*:stack/iam-*"]
               - Effect: Allow
                 Action: ["iam:PassRole"]
                 Resource: !Sub "${CloudformationAssumeRole.Arn}"
